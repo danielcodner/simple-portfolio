@@ -15,6 +15,40 @@
   });
 
   /* ---------------------------------------------------------
+     Hero parallax background
+  --------------------------------------------------------- */
+  const hero = document.querySelector(".hero");
+  const parallaxLayers = document.querySelectorAll(".hero-parallax-layer");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (hero && parallaxLayers.length && !prefersReducedMotion) {
+    const speeds = [60, 130, 95];
+    let ticking = false;
+
+    const updateParallax = () => {
+      ticking = false;
+      const rect = hero.getBoundingClientRect();
+      const progress = Math.min(Math.max(-rect.top / rect.height, 0), 1);
+      parallaxLayers.forEach((layer, i) => {
+        const y = progress * (speeds[i] || 80);
+        layer.style.transform = `translate3d(-50%, ${y}px, 0)`;
+      });
+    };
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
+    updateParallax();
+  }
+
+  /* ---------------------------------------------------------
      Reveal-on-scroll
   --------------------------------------------------------- */
   const revealEls = document.querySelectorAll("[data-reveal]");

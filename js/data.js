@@ -81,5 +81,62 @@ const CASE_STUDIES = [
       "I ran ideation workshops to define business and design principles — landing on themes like premium brand quality, an immersive/video-led experience, and a 'product first' approach for a refreshed target audience. I built customer personas spanning loyal Topshop shoppers, lapsed customers and a new 'designer-obsessed' segment, then used platform mapping and competitor analysis (against Zara, COS, Massimo Dutti and Arket) to audit the end-to-end journey. I balanced conflicting stakeholder priorities through regular focus groups, onboarded additional designers onto the project as lead designer, and presented progress regularly to keep the brand and business teams aligned.",
     outcome:
       "The work produced an agreed set of business and design principles, a validated platform framework, and a competitor-benchmarked design direction for Topshop's relaunch as a standalone, premium destination — with stakeholder buy-in secured despite competing priorities and a tight timeline."
+  },
+  {
+    id: "project-five",
+    index: "04",
+    title: "Case study title",
+    tagline: "One-line summary of the project and the problem it solved.",
+    role: "Your role",
+    year: "2026",
+    tools: "Tools used",
+    tags: ["Tag one", "Tag two", "Tag three"],
+    gallery: [
+      "linear-gradient(135deg, #e0d7c9 0%, #8a6a4f 100%)",
+      "linear-gradient(135deg, #c9b8a3 0%, #4f3a29 100%)",
+      "linear-gradient(135deg, #ede4d8 0%, #a68b6f 100%)"
+    ],
+    overview: "Placeholder overview — replace with a short summary of the project, the client, and your role.",
+    problem: "Placeholder problem — describe the challenge or pain point that kicked off the work.",
+    process: "Placeholder process — outline the research, design, and collaboration steps you took.",
+    outcome: "Placeholder outcome — summarise the results, metrics, or impact of the project."
+  },
+  {
+    id: "project-six",
+    index: "05",
+    title: "Case study title",
+    tagline: "One-line summary of the project and the problem it solved.",
+    role: "Your role",
+    year: "2026",
+    tools: "Tools used",
+    tags: ["Tag one", "Tag two", "Tag three"],
+    gallery: [
+      "linear-gradient(135deg, #d9e3ec 0%, #3f5a75 100%)",
+      "linear-gradient(135deg, #aebfd1 0%, #1c2c3d 100%)",
+      "linear-gradient(135deg, #eef2f6 0%, #6f8ba3 100%)"
+    ],
+    overview: "Placeholder overview — replace with a short summary of the project, the client, and your role.",
+    problem: "Placeholder problem — describe the challenge or pain point that kicked off the work.",
+    process: "Placeholder process — outline the research, design, and collaboration steps you took.",
+    outcome: "Placeholder outcome — summarise the results, metrics, or impact of the project."
+  },
+  {
+    id: "project-seven",
+    index: "06",
+    title: "Case study title",
+    tagline: "One-line summary of the project and the problem it solved.",
+    role: "Your role",
+    year: "2026",
+    tools: "Tools used",
+    tags: ["Tag one", "Tag two", "Tag three"],
+    gallery: [
+      "linear-gradient(135deg, #e6dce8 0%, #6b4d78 100%)",
+      "linear-gradient(135deg, #c3aecb 0%, #2e1f38 100%)",
+      "linear-gradient(135deg, #f1ebf2 0%, #9377a1 100%)"
+    ],
+    overview: "Placeholder overview — replace with a short summary of the project, the client, and your role.",
+    problem: "Placeholder problem — describe the challenge or pain point that kicked off the work.",
+    process: "Placeholder process — outline the research, design, and collaboration steps you took.",
+    outcome: "Placeholder outcome — summarise the results, metrics, or impact of the project."
   }
 ];

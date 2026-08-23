@@ -22,7 +22,7 @@
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (hero && parallaxLayers.length && !prefersReducedMotion) {
-    const speeds = [60, 130, 95];
+    const speeds = [90, 190, 140];
     let ticking = false;
 
     const updateParallax = () => {

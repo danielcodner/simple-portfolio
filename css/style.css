@@ -851,14 +851,48 @@ body.nav-open { overflow: hidden; }
     flex-direction: column;
     justify-content: flex-start;
     gap: 0;
-    background: transparent;
+    color: var(--color-ink);
     padding: 7.5rem var(--gutter) 0;
     opacity: 0;
     transition: opacity 0.3s var(--ease);
+    overflow: hidden;
   }
   .main-nav.is-open {
     display: flex;
     opacity: 1;
+  }
+  /* liquid-glass layer 1: distorted, blurred backdrop (kept clear of the
+     sticky header above so its own translucency isn't disturbed) */
+  .main-nav::before {
+    content: "";
+    position: absolute;
+    inset: 72px 0 0 0;
+    z-index: 0;
+    pointer-events: none;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    filter: url(#glass-distortion);
+    isolation: isolate;
+  }
+  /* liquid-glass layer 2: white tint + inset edge highlights */
+  .main-nav::after {
+    content: "";
+    position: absolute;
+    inset: 72px 0 0 0;
+    z-index: 1;
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow:
+      inset 4px 4px 2px 0 rgba(255, 255, 255, 0.6),
+      inset -3px -3px 2px 1px rgba(255, 255, 255, 0.55);
+  }
+  .main-nav a {
+    position: relative;
+    z-index: 2;
+    padding: 1rem 0 1rem 0;
+    border-bottom: 1px solid var(--color-line);
+    font-size: 1.3rem;
+    transition: padding-left 0.35s var(--ease), color 0.35s var(--ease);
   }
 
   .nav-scrim {
@@ -869,7 +903,7 @@ body.nav-open { overflow: hidden; }
     width: 100vw;
     height: 100dvh;
     z-index: 89;
-    background: rgba(23, 20, 15, 0.8);
+    background: rgba(246, 253, 249, 0.65);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     opacity: 0;
@@ -879,17 +913,11 @@ body.nav-open { overflow: hidden; }
     display: block;
     opacity: 1;
   }
-  .main-nav a {
-    padding: 1rem 0 1rem 0;
-    border-bottom: 1px solid var(--color-line-inverse);
-    font-size: 1.3rem;
-    transition: padding-left 0.35s var(--ease), color 0.35s var(--ease);
-  }
   .main-nav a::after { display: none; }
   .main-nav a:hover,
   .main-nav a:focus-visible {
     padding-left: 1rem;
-    color: var(--sage-400);
+    color: var(--color-accent);
   }
   .main-nav a:last-child { border-bottom: none; }
 

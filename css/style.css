@@ -50,6 +50,7 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
+  overflow-x: hidden;
   background: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-body);
@@ -202,13 +203,25 @@ section {
 --------------------------------------------------------- */
 .hero {
   position: relative;
-  overflow: hidden;
   padding-top: clamp(5rem, 14vw, 9rem);
   padding-bottom: clamp(4rem, 8vw, 6rem);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: clamp(2.5rem, 6vw, 4rem);
+}
+/* full-bleed background: .hero itself stays centered/max-width like every
+   other section, so this breaks out to the true viewport edges behind it */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  z-index: -1;
+  background: var(--sage-300);
 }
 .hero-content {
   position: relative;
@@ -247,8 +260,6 @@ section {
   height: 58vw;
   max-width: 580px;
   max-height: 580px;
-  background: radial-gradient(circle, var(--forest-600) 0%, transparent 70%);
-  opacity: 0.5;
 }
 .hero-parallax-layer[data-parallax-layer="2"] {
   top: 26%;
@@ -257,8 +268,6 @@ section {
   height: 36vw;
   max-width: 380px;
   max-height: 380px;
-  background: radial-gradient(circle, var(--forest-900) 0%, transparent 70%);
-  opacity: 0.32;
 }
 .hero-parallax-layer[data-parallax-layer="3"] {
   top: 12%;
@@ -267,14 +276,6 @@ section {
   height: 32vw;
   max-width: 340px;
   max-height: 340px;
-  background: radial-gradient(circle, var(--sage-400) 0%, transparent 70%);
-  opacity: 0.7;
-}
-.hero-parallax::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, transparent 0%, var(--color-bg) 96%);
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-parallax-layer { transform: translate3d(-50%, 0, 0) !important; }
@@ -314,15 +315,15 @@ section {
   margin-top: 2rem;
   padding: 0.8rem 1.6rem;
   border-radius: 999px;
-  background: var(--sage-500);
+  background: var(--forest-900);
   color: var(--sage-100);
   font-size: 0.9rem;
   font-weight: 600;
   transition: background 0.3s var(--ease), color 0.3s var(--ease);
 }
 .hero-cta:hover {
-  background: var(--forest-900);
-  color: var(--sage-100);
+  background: var(--sage-100);
+  color: var(--forest-900);
 }
 
 .hero-meta {
@@ -331,8 +332,8 @@ section {
   gap: 2rem;
   flex-wrap: wrap;
   font-size: 0.85rem;
-  color: var(--color-ink-faint);
-  border-top: 1px solid var(--color-line);
+  color: var(--color-ink-soft);
+  border-top: 1px solid rgba(24, 36, 32, 0.22);
   padding-top: 1.25rem;
 }
 

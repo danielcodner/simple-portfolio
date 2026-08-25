@@ -85,7 +85,7 @@ const CASE_STUDIES = [
   {
     id: "project-five",
     index: "04",
-    title: "Case study title",
+    title: "Sale Toolkit Guidelines",
     tagline: "One-line summary of the project and the problem it solved.",
     role: "Your role",
     year: "2026",
@@ -104,7 +104,7 @@ const CASE_STUDIES = [
   {
     id: "project-six",
     index: "05",
-    title: "Case study title",
+    title: "Trending Reels",
     tagline: "One-line summary of the project and the problem it solved.",
     role: "Your role",
     year: "2026",

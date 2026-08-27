@@ -7,19 +7,32 @@
     renderCaseStudy() in main.js to use <img> instead of a background style.
   - "video" is the path to an mp4 shown in the phone-frame mockup above the
     Overview section. Point two case studies at the same path to reuse a video.
+  - "metrics" is optional — an array of { label, value } pairs shown as a
+    "Product Metrics" block between Process and Outcome, styled like the
+    Role/Year/Tools row. Omit it (or leave the array empty) and the block
+    won't render at all. Example:
+      metrics: [
+        { label: "Conversion", value: "+24%" },
+        { label: "Support tickets", value: "-70%" }
+      ]
 */
 
 const CASE_STUDIES = [
   {
     id: "project-one",
     index: "01",
-    title: "Redesigning ASOS homepage & Trending",
+    title: "Redesigning ASOS homepage",
     tagline: "Cutting checkout drop-off through clearer flow and trust signals.",
-    role: "Senior Product Designer",
+    role: "Product Designer",
     year: "2026",
     tools: "Figma, Lovable, Usertesting.com",
     tags: ["Product startegy", "UX Research", "Ai Prototyping", "Interaction Design", "E-commerce", "Wireframing"],
-    video: "Assets/case-studies/asos-demo.mp4",
+    metrics: [
+      { label: "Metric one", value: "Value" },
+      { label: "Metric two", value: "Value" },
+      { label: "Metric three", value: "Value" }
+    ],
+    video: "Assets/app-demo.mp4",
     gallery: [
       "linear-gradient(135deg, #d2e1da 0%, #3f6b53 100%)",
       "linear-gradient(135deg, #a3c1ac 0%, #182420 100%)",
@@ -39,11 +52,16 @@ const CASE_STUDIES = [
     index: "02",
     title: "Redesigning the ASOS Android app",
     tagline: "The Android app was falling behind iOS and Web — old-fashioned, inconsistent, and overdue a rebuild.",
-    role: "Lead Product Designer",
+    role: "Product Designer",
     year: "2017",
     tools: "Sketch, Usertesting.com",
     tags: ["Cross-platform Design", "UX Research", "Android"],
-    video: "Assets/case-studies/android-demo.mp4",
+    metrics: [
+      { label: "Metric one", value: "Value" },
+      { label: "Metric two", value: "Value" },
+      { label: "Metric three", value: "Value" }
+    ],
+    video: "Assets/app-demo.mp4",
     gallery: [
       "url('Assets/case-studies/android-before-after.png') top center / cover no-repeat",
       "url('Assets/case-studies/android-results.png') top center / cover no-repeat",
@@ -63,10 +81,15 @@ const CASE_STUDIES = [
     index: "03",
     title: "TOPSHOP website design relaunch",
     tagline: "Bringing a once-loved high street brand back to life, independent from ASOS.com.",
-    role: "Lead Product Designer",
+    role: "Product Designer",
     year: "2024",
     tools: "Figma, Miro",
     tags: ["Brand strategy", "UX Research", "E-commerce"],
+    metrics: [
+      { label: "Metric one", value: "Value" },
+      { label: "Metric two", value: "Value" },
+      { label: "Metric three", value: "Value" }
+    ],
     video: "Assets/app-demo.mp4",
     gallery: [
       "url('Assets/case-studies/topshop-problem.png') top center / cover no-repeat",
@@ -86,49 +109,64 @@ const CASE_STUDIES = [
     id: "project-five",
     index: "04",
     title: "Sale Toolkit Guidelines",
-    tagline: "One-line summary of the project and the problem it solved.",
-    role: "Your role",
+    tagline: "Creating a single-source brand guidelines toolkit",
+    role: "Product Designer",
     year: "2026",
-    tools: "Tools used",
-    tags: ["Tag one", "Tag two", "Tag three"],
+    tools: "Figma, Powerpoint",
+    tags: ["Product startegy", "A/B test", "Guidelines", "Design"],
+    metrics: [
+      { label: "Engagement", value: "+21% YoY vs +15% (previous sale)" }
+    ],
+    video: "Assets/sale-demo.mp4",
     gallery: [
       "linear-gradient(135deg, #e0d7c9 0%, #8a6a4f 100%)",
       "linear-gradient(135deg, #c9b8a3 0%, #4f3a29 100%)",
       "linear-gradient(135deg, #ede4d8 0%, #a68b6f 100%)"
     ],
-    overview: "Placeholder overview — replace with a short summary of the project, the client, and your role.",
-    problem: "Placeholder problem — describe the challenge or pain point that kicked off the work.",
-    process: "Placeholder process — outline the research, design, and collaboration steps you took.",
-    outcome: "Placeholder outcome — summarise the results, metrics, or impact of the project."
+    overview: "Sale is a crucial trading tool for driving sell-through of seasonal stock and clearing inventory.",
+    problem: "Sale campaigns were often not following and type of guidelines, missed alignment with business direction and lacked a form of consistency from season to season. We were unable to determine what the best customer experience would be.",
+    process: "After A/B testing some different types of Sale directions we found that customers respond to clear, mission-led UX and urgency. Some of the things that worked well were UX-led new re-design of sale which drove a performance uplift. Including a hero shop all button which significantly increased clicks, showing appetite for those pages pulling interest away from sale category buttons. Dresses and Shoes were some of the most popular mission-led categories. Sale recommendations were also a top conversion driver with strong performance across the app.",
+    outcome: "The outcome was to utilise product design for conversion driven moments to ensure the creative is performance optimised. To develop a Brand Toolkit for Sale creatives to ensure consistency and to deliver against both brand and performance goals. This would be available for anyone in the business wether existing or new persons and be ready to pickup to reference, adapt and educate. The Sale Brand Toolkit Guidelines are an internal that I created for all customer-facing teams including marketing, Brand, Design, Trading and UX. They were created to ensure a consistent customer experience that become synonymous with our Sale period. These guidelines provide a framework to balance value and urgency with clarity, quality, and brand desirability, ensuring that sales targets can be met without compromise. These guidelines were designed to optimise urgent sales on the right stock, while preserving our return to full price bounce back and brand's long-term consistency."
   },
   {
     id: "project-six",
     index: "05",
     title: "Trending Reels",
     tagline: "One-line summary of the project and the problem it solved.",
-    role: "Your role",
+    role: "Product Designer",
     year: "2026",
     tools: "Tools used",
-    tags: ["Tag one", "Tag two", "Tag three"],
+    tags: ["Content creation", "Guidelines", "Design", "Image retouching"],
+    metrics: [
+      { label: "Content", value: "Value" },
+      { label: "AVG Reels per visit", value: "5" },
+    ],
+    video: "Assets/trending-reels.mp4",
     gallery: [
       "linear-gradient(135deg, #d9e3ec 0%, #3f5a75 100%)",
       "linear-gradient(135deg, #aebfd1 0%, #1c2c3d 100%)",
       "linear-gradient(135deg, #eef2f6 0%, #6f8ba3 100%)"
     ],
-    overview: "Placeholder overview — replace with a short summary of the project, the client, and your role.",
-    problem: "Placeholder problem — describe the challenge or pain point that kicked off the work.",
-    process: "Placeholder process — outline the research, design, and collaboration steps you took.",
-    outcome: "Placeholder outcome — summarise the results, metrics, or impact of the project."
+    overview: "Show customers what's hot and widely loved to help them shop confidently, reduce decision fatigue, and stay ahead as trendsetters.",
+    problem: "There was an opportunity to create a dedicated destination where customers could come and shop what's popular and selling right now within the ASOS App. Customers go to social media to find this type of content and we want to surface this all in one place within the app.",
+    process: "A project that stakeholders felt strongly about bringing added customer value, this started with a simple and familiar experience. I ran numerous user testing tests to try and validate which type of content landed best with our customers and there was various suggestions where personalisation seemed to be a major requirement. Low-motion video was popular along side well crafted cinematic content however more static slide-show type videos were not favoured. Content needed to be less bespoke if it was not dynamically personalised to the individual. I spent several months working on content for this initiative and feeding the reels for both WW & MW 3 times a week. Along the way we made small UX tweaks to the experience improving the click-through journeys, endless scroll and video controls.",
+    outcome: "Created a space to put fashion into context through short format videos and static impactful imagery. Creating rich and meaningful content that enhances the users experience and promotes our products in the best possible way. This enables customers to both discovery and shop the latest trends in a familiar format they're used to on social media."
   },
   {
     id: "project-seven",
     index: "06",
-    title: "Case study title",
-    tagline: "One-line summary of the project and the problem it solved.",
-    role: "Your role",
-    year: "2026",
+    title: "ASOS Horizons redesign",
+    tagline: "Rethinking the ASOS brand and redesign",
+    role: "Product Designer",
+    year: "2024",
     tools: "Tools used",
     tags: ["Tag one", "Tag two", "Tag three"],
+    metrics: [
+      { label: "Metric one", value: "Value" },
+      { label: "Metric two", value: "Value" },
+      { label: "Metric three", value: "Value" }
+    ],
+    video: "Assets/app-demo.mp4",
     gallery: [
       "linear-gradient(135deg, #e6dce8 0%, #6b4d78 100%)",
       "linear-gradient(135deg, #c3aecb 0%, #2e1f38 100%)",

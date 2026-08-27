@@ -203,7 +203,7 @@ section {
 --------------------------------------------------------- */
 .hero {
   position: relative;
-  padding-top: clamp(5rem, 14vw, 9rem);
+  padding-top: clamp(4rem, 8vw, 6rem);
   padding-bottom: clamp(4rem, 8vw, 6rem);
   display: flex;
   flex-direction: column;
@@ -340,28 +340,18 @@ section {
 .phone-frame {
   position: relative;
   width: clamp(180px, 46vw, 240px);
-  aspect-ratio: 9 / 19.5;
   margin: 0 auto;
   padding: 10px;
   background: var(--forest-900);
   border-radius: 34px;
   box-shadow: 0 24px 60px rgba(24, 36, 32, 0.22);
 }
-.phone-notch {
-  position: absolute;
-  top: 14px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 64px;
-  height: 16px;
-  background: var(--forest-900);
-  border-radius: 999px;
-  z-index: 2;
-}
 .phone-screen {
   position: relative;
   width: 100%;
-  height: 100%;
+  /* matches the native ratio of Assets/app-demo.mp4 (480x1044) so
+     object-fit: cover on .phone-video never has to crop the sides */
+  aspect-ratio: 480 / 1044;
   border-radius: 24px;
   overflow: hidden;
   background: linear-gradient(160deg, var(--forest-600) 0%, var(--forest-900) 100%);
@@ -785,6 +775,10 @@ section {
   border-top: 1px solid var(--color-line);
   border-bottom: 1px solid var(--color-line);
 }
+/* reused inside a .modal-block (e.g. Product Metrics) — the h3's own
+   margin-bottom already provides the gap, so drop this margin-top to
+   avoid the two stacking */
+.modal-block .modal-meta { margin-top: 0; }
 .modal-meta div { font-size: 0.85rem; }
 .modal-meta dt {
   color: var(--color-ink-faint);

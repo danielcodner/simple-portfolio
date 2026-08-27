@@ -212,7 +212,6 @@
         study.video
           ? `<div class="modal-video">
                <div class="phone-frame">
-                 <div class="phone-notch"></div>
                  <div class="phone-screen">
                    <video class="phone-video" autoplay muted loop playsinline>
                      <source src="${study.video}" type="video/mp4">
@@ -235,6 +234,16 @@
         <h3>Process</h3>
         <p>${study.process}</p>
       </div>
+      ${
+        study.metrics && study.metrics.length
+          ? `<div class="modal-block">
+               <h3>Product Metrics</h3>
+               <dl class="modal-meta">
+                 ${study.metrics.map((m) => `<div><dt>${m.label}</dt><dd>${m.value}</dd></div>`).join("")}
+               </dl>
+             </div>`
+          : ""
+      }
       <div class="modal-block">
         <h3>Outcome</h3>
         <p>${study.outcome}</p>

@@ -15,6 +15,19 @@
   --forest-800: #263830;
   --forest-900: #182420;
 
+  /* dark-mode scale: near-black purple backgrounds, lavender text,
+     purple/pink accents */
+  --dark-950: #0f0c16;
+  --dark-900: #1c1626;
+  --dark-850: #211a30;
+  --purple-400: #c893fb;
+  --purple-500: #a855f7;
+  --pink-400: #f472b6;
+  --pink-500: #ec4899;
+  --lav-100: #f4eefb;
+  --lav-300: #cabfdb;
+  --lav-500: #8d7ea3;
+
   --color-bg: var(--sage-100);
   --color-bg-raised: var(--sage-200);
   --color-ink: var(--forest-900);
@@ -36,6 +49,26 @@
   --gutter: clamp(1.25rem, 4vw, 3rem);
 
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------------------------------------------------------
+   Dark mode — remaps the semantic tokens above; component-level
+   overrides for hardcoded (non-token) colors live in the
+   "Dark mode overrides" section at the end of this file.
+--------------------------------------------------------- */
+:root[data-theme="dark"] {
+  --color-bg: var(--dark-950);
+  --color-bg-raised: var(--dark-900);
+  --color-ink: var(--lav-100);
+  --color-ink-soft: var(--lav-300);
+  --color-ink-faint: var(--lav-500);
+  --color-accent: var(--purple-500);
+  --color-line: rgba(244, 238, 251, 0.14);
+  --color-line-strong: rgba(244, 238, 251, 0.24);
+
+  --color-bg-inverse: var(--dark-850);
+  --color-ink-inverse: var(--lav-100);
+  --color-line-inverse: rgba(244, 238, 251, 0.16);
 }
 
 /* ---------------------------------------------------------
@@ -145,12 +178,36 @@ dl, dd { margin: 0; }
 .header-cta {
   font-size: 0.85rem;
   padding: 0.55rem 1.1rem;
-  border: 1px solid var(--color-ink-inverse);
   border-radius: 999px;
   white-space: nowrap;
+  /* same fill, weight and hover as .hero-cta (colours are shared below) */
+  font-weight: 600;
+  background: var(--forest-900);
+  color: #fff;
+  transition: background 0.3s var(--ease), color 0.3s var(--ease);
+}
+.header-cta:hover {
+  background: var(--sage-100);
+  color: var(--forest-900);
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--color-ink-inverse);
+  color: var(--color-ink-inverse);
   transition: background 0.25s var(--ease), color 0.25s var(--ease);
 }
-.header-cta:hover { background: var(--color-ink-inverse); color: var(--color-bg-inverse); }
+.theme-toggle:hover { background: var(--color-ink-inverse); color: var(--color-bg-inverse); }
+.theme-toggle svg { width: 18px; height: 18px; }
+.theme-toggle .icon-moon { display: none; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: none; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: block; }
 
 .nav-toggle {
   display: none;
@@ -160,7 +217,6 @@ dl, dd { margin: 0; }
   flex-direction: column;
   justify-content: center;
   gap: 6px;
-  margin-left: auto;
 }
 .nav-toggle span {
   display: block;
@@ -253,6 +309,8 @@ section {
   filter: blur(45px);
   will-change: transform;
   transform: translate3d(-50%, 0, 0);
+  /* invisible in light mode; dark mode fades them in (see overrides) */
+  opacity: 0;
 }
 .hero-parallax-layer[data-parallax-layer="1"] {
   top: 2%;
@@ -260,6 +318,7 @@ section {
   height: 58vw;
   max-width: 580px;
   max-height: 580px;
+  background: radial-gradient(circle, var(--purple-500) 0%, transparent 70%);
 }
 .hero-parallax-layer[data-parallax-layer="2"] {
   top: 26%;
@@ -268,6 +327,7 @@ section {
   height: 36vw;
   max-width: 380px;
   max-height: 380px;
+  background: radial-gradient(circle, var(--pink-500) 0%, transparent 70%);
 }
 .hero-parallax-layer[data-parallax-layer="3"] {
   top: 12%;
@@ -276,6 +336,7 @@ section {
   height: 32vw;
   max-width: 340px;
   max-height: 340px;
+  background: radial-gradient(circle, var(--purple-400) 0%, transparent 70%);
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-parallax-layer { transform: translate3d(-50%, 0, 0) !important; }
@@ -316,7 +377,7 @@ section {
   padding: 0.8rem 1.6rem;
   border-radius: 999px;
   background: var(--forest-900);
-  color: var(--sage-100);
+  color: #fff;
   font-size: 0.9rem;
   font-weight: 600;
   transition: background 0.3s var(--ease), color 0.3s var(--ease);
@@ -917,6 +978,7 @@ body.nav-open { overflow: hidden; }
   .main-nav a:last-child { border-bottom: none; }
 
   .header-cta { display: none; }
+  .theme-toggle { margin-left: auto; }
   .nav-toggle { display: flex; }
 
   .work-item-trigger {
@@ -926,3 +988,81 @@ body.nav-open { overflow: hidden; }
 
 .nav-toggle[aria-expanded="true"] span:first-child { transform: translateY(3.5px) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+
+/* ---------------------------------------------------------
+   Dark mode overrides — everything above adapts automatically
+   via the token remap in :root[data-theme="dark"]; the rules
+   below are for places that use a hardcoded color instead of
+   a semantic token (--color-bg, --color-ink, etc).
+--------------------------------------------------------- */
+[data-theme="dark"] .site-header {
+  background: rgba(33, 26, 48, 0.82);
+  border-bottom-color: rgba(244, 238, 251, 0.16);
+}
+
+[data-theme="dark"] .hero::before { background: var(--dark-850); }
+
+[data-theme="dark"] .phone-frame { background: var(--purple-500); }
+[data-theme="dark"] .phone-screen { background: linear-gradient(160deg, var(--dark-850) 0%, var(--dark-900) 100%); }
+
+[data-theme="dark"] .hero-cta,
+[data-theme="dark"] .header-cta {
+  background: var(--purple-500);
+  color: #fff;
+}
+[data-theme="dark"] .hero-cta:hover,
+[data-theme="dark"] .header-cta:hover {
+  background: var(--pink-500);
+  color: #fff;
+}
+
+[data-theme="dark"] .hero-meta { border-top-color: rgba(244, 238, 251, 0.18); }
+
+[data-theme="dark"] .hero-parallax-layer[data-parallax-layer="1"] { opacity: 0.4; }
+[data-theme="dark"] .hero-parallax-layer[data-parallax-layer="2"] { opacity: 0.28; }
+[data-theme="dark"] .hero-parallax-layer[data-parallax-layer="3"] { opacity: 0.35; }
+
+[data-theme="dark"] .modal-overlay,
+[data-theme="dark"] .nav-scrim {
+  background: rgba(15, 12, 22, 0.7);
+}
+
+[data-theme="dark"] .modal-scroll { scrollbar-color: var(--purple-500) transparent; }
+[data-theme="dark"] .modal-scroll::-webkit-scrollbar-thumb { background-color: var(--purple-500); }
+[data-theme="dark"] .modal-scroll::-webkit-scrollbar-thumb:hover { background-color: var(--pink-500); }
+
+[data-theme="dark"] .carousel-arrow {
+  background: rgba(28, 22, 38, 0.75);
+  color: var(--lav-100);
+}
+[data-theme="dark"] .carousel-arrow:hover { background: rgba(168, 85, 247, 0.55); }
+[data-theme="dark"] .carousel-dot { background: rgba(244, 238, 251, 0.35); }
+[data-theme="dark"] .carousel-dot:hover { background: rgba(244, 238, 251, 0.6); }
+[data-theme="dark"] .carousel-dot.is-active { background: var(--purple-400); }
+
+[data-theme="dark"] .modal-nav {
+  background: rgba(28, 22, 38, 0.45);
+  border-top-color: rgba(244, 238, 251, 0.18);
+}
+
+/* ---------------------------------------------------------
+   Theme switch transition — main.js adds .theme-transition to
+   <html> for ~0.5s around a manual toggle only, so it never
+   slows normal hovers or the first paint. Skipped entirely for
+   reduced-motion users.
+--------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  html.theme-transition,
+  html.theme-transition *,
+  html.theme-transition *::before,
+  html.theme-transition *::after {
+    transition:
+      background-color 0.45s ease,
+      color 0.45s ease,
+      border-color 0.45s ease,
+      box-shadow 0.45s ease,
+      fill 0.45s ease,
+      stroke 0.45s ease,
+      opacity 0.45s ease !important;
+  }
+}

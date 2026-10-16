@@ -4,6 +4,45 @@
   document.getElementById("year").textContent = new Date().getFullYear();
 
   /* ---------------------------------------------------------
+     Theme toggle (light / dark) — initial state is already set
+     by the inline script in <head> to avoid a flash of the
+     wrong theme; this just wires up the click + persistence.
+  --------------------------------------------------------- */
+  const themeToggle = document.querySelector(".theme-toggle");
+  const THEME_KEY = "theme-preference";
+
+  let themeTransitionTimer;
+
+  function setTheme(theme) {
+    // enable colour transitions only for this manual switch
+    const root = document.documentElement;
+    root.classList.add("theme-transition");
+    clearTimeout(themeTransitionTimer);
+    themeTransitionTimer = setTimeout(() => root.classList.remove("theme-transition"), 500);
+
+    if (theme === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.removeAttribute("data-theme");
+    }
+    if (themeToggle) themeToggle.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+    try {
+      localStorage.setItem(THEME_KEY, theme);
+    } catch (e) {}
+  }
+
+  if (themeToggle) {
+    themeToggle.setAttribute(
+      "aria-pressed",
+      document.documentElement.getAttribute("data-theme") === "dark" ? "true" : "false"
+    );
+    themeToggle.addEventListener("click", () => {
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      setTheme(isDark ? "light" : "dark");
+    });
+  }
+
+  /* ---------------------------------------------------------
      Phone videos: click to pause/play (event delegation, since
      case study videos are re-rendered dynamically per modal)
   --------------------------------------------------------- */

@@ -176,38 +176,71 @@ dl, dd { margin: 0; }
 .main-nav a:hover::after { right: 0; }
 
 .header-cta {
-  font-size: 0.85rem;
-  padding: 0.55rem 1.1rem;
-  border-radius: 999px;
-  white-space: nowrap;
-  /* same fill, weight and hover as .hero-cta (colours are shared below) */
-  font-weight: 600;
-  background: var(--forest-900);
-  color: #fff;
-  transition: background 0.3s var(--ease), color 0.3s var(--ease);
-}
-.header-cta:hover {
-  background: var(--sage-100);
-  color: var(--forest-900);
-}
-
-.theme-toggle {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: 1px solid var(--color-ink-inverse);
-  color: var(--color-ink-inverse);
-  transition: background 0.25s var(--ease), color 0.25s var(--ease);
+  height: 30px;
+  font-size: 0.85rem;
+  padding: 0 1.1rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  /* resting/hover are reversed vs .hero-cta: this one sits on the dark
+     green header, so it starts light and inverts to green on hover */
+  font-weight: 600;
+  background: var(--sage-100);
+  color: var(--forest-900);
+  transition: background 0.3s var(--ease), color 0.3s var(--ease);
 }
-.theme-toggle:hover { background: var(--color-ink-inverse); color: var(--color-bg-inverse); }
-.theme-toggle svg { width: 18px; height: 18px; }
-.theme-toggle .icon-moon { display: none; }
-[data-theme="dark"] .theme-toggle .icon-sun { display: none; }
-[data-theme="dark"] .theme-toggle .icon-moon { display: block; }
+.header-cta:hover {
+  background: var(--forest-600);
+  color: #fff;
+}
+
+/* sliding sun/moon pill — track flips cream/navy, knob slides and
+   swaps icon; page-wide fade-on-switch is handled separately by
+   html.theme-transition and is untouched by this component */
+.theme-toggle {
+  position: relative;
+  flex-shrink: 0;
+  width: 52px;
+  height: 30px;
+  border-radius: 999px;
+  border: 2px solid var(--sage-400);
+  background: var(--sage-200);
+  transition: background-color 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+.theme-toggle-knob {
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--forest-600);
+  color: var(--sage-100);
+  transition: left 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55), background-color 0.4s var(--ease), color 0.4s var(--ease);
+}
+.theme-toggle-knob svg {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+}
+.theme-toggle-knob .icon-sun { opacity: 1; transform: rotate(0deg) scale(1); }
+.theme-toggle-knob .icon-moon { opacity: 0; transform: rotate(-90deg) scale(0.5); }
+
+[data-theme="dark"] .theme-toggle { background: #1a1838; border-color: #2d2a4e; }
+[data-theme="dark"] .theme-toggle-knob {
+  left: calc(100% - 24px);
+  background: #e8e6f0;
+  color: #1a1838;
+}
+[data-theme="dark"] .theme-toggle-knob .icon-sun { opacity: 0; transform: rotate(90deg) scale(0.5); }
+[data-theme="dark"] .theme-toggle-knob .icon-moon { opacity: 1; transform: rotate(0deg) scale(1); }
 
 .nav-toggle {
   display: none;
@@ -376,7 +409,7 @@ section {
   margin-top: 2rem;
   padding: 0.8rem 1.6rem;
   border-radius: 999px;
-  background: var(--forest-900);
+  background: var(--forest-600);
   color: #fff;
   font-size: 0.9rem;
   font-weight: 600;
@@ -606,8 +639,8 @@ section {
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: rgba(246, 253, 249, 0.65);
-  backdrop-filter: blur(4px);
+  background: rgba(246, 253, 249, 0.78);
+  backdrop-filter: blur(4.8px);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.35s var(--ease), visibility 0.35s var(--ease);
@@ -644,6 +677,7 @@ section {
   position: absolute;
   inset: 0;
   z-index: 0;
+  border-radius: inherit;
   pointer-events: none;
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
@@ -656,6 +690,7 @@ section {
   position: absolute;
   inset: 0;
   z-index: 1;
+  border-radius: inherit;
   pointer-events: none;
   background: rgba(255, 255, 255, 0.1);
   box-shadow:
@@ -676,36 +711,12 @@ section {
   right: 1.25rem;
   z-index: 5;
   width: 42px; height: 42px;
-  border-radius: 50%;
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: transform 0.25s var(--ease);
 }
-.modal-close::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  border-radius: 50%;
-  backdrop-filter: blur(8px) saturate(160%);
-  -webkit-backdrop-filter: blur(8px) saturate(160%);
-}
-.modal-close::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow:
-    inset 4px 4px 2px 0 rgba(255, 255, 255, 0.6),
-    inset -3px -3px 2px 1px rgba(255, 255, 255, 0.55);
-  transition: background 0.25s var(--ease);
-}
 .modal-close:hover { transform: rotate(90deg); }
-.modal-close:hover::after { background: var(--color-ink); }
 .modal-close span {
   position: absolute;
   z-index: 2;
@@ -713,7 +724,6 @@ section {
   background: var(--color-ink);
   transition: background 0.25s var(--ease);
 }
-.modal-close:hover span { background: var(--color-bg); }
 .modal-close span:first-child { transform: rotate(45deg); }
 .modal-close span:last-child { transform: rotate(-45deg); }
 
@@ -874,9 +884,11 @@ section {
   z-index: 2;
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  /* same depth treatment as dark mode's tinted bar, built from the
+     light theme's own forest tone instead of the dark palette */
+  border-top: 1px solid rgba(63, 107, 83, 0.25);
   padding: 1rem clamp(1.5rem, 6vw, 4rem);
-  background: rgba(246, 253, 249, 0.4);
+  background: rgba(63, 107, 83, 0.12);
   backdrop-filter: blur(20px) saturate(165%);
   -webkit-backdrop-filter: blur(20px) saturate(165%);
   font-size: 0.85rem;
@@ -925,8 +937,8 @@ body.nav-open { overflow: hidden; }
     inset: 72px 0 0 0;
     z-index: 0;
     pointer-events: none;
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3.6px);
+    -webkit-backdrop-filter: blur(3.6px);
     filter: url(#glass-distortion);
     isolation: isolate;
   }
@@ -938,9 +950,6 @@ body.nav-open { overflow: hidden; }
     z-index: 1;
     pointer-events: none;
     background: rgba(255, 255, 255, 0.1);
-    box-shadow:
-      inset 4px 4px 2px 0 rgba(255, 255, 255, 0.6),
-      inset -3px -3px 2px 1px rgba(255, 255, 255, 0.55);
   }
   .main-nav a {
     position: relative;
@@ -1024,7 +1033,21 @@ body.nav-open { overflow: hidden; }
 
 [data-theme="dark"] .modal-overlay,
 [data-theme="dark"] .nav-scrim {
-  background: rgba(15, 12, 22, 0.7);
+  background: rgba(15, 12, 22, 0.84);
+}
+
+/* 20% more opaque than the light-mode shadow, and softer edge highlights
+   so the glass reads calmer against the dark backdrop */
+[data-theme="dark"] .modal {
+  box-shadow:
+    0 6px 6px rgba(0, 0, 0, 0.24),
+    0 0 20px rgba(0, 0, 0, 0.12),
+    0 30px 80px rgba(0, 0, 0, 0.3);
+}
+[data-theme="dark"] .modal::after {
+  box-shadow:
+    inset 4px 4px 2px 0 rgba(255, 255, 255, 0.22),
+    inset -3px -3px 2px 1px rgba(255, 255, 255, 0.18);
 }
 
 [data-theme="dark"] .modal-scroll { scrollbar-color: var(--purple-500) transparent; }

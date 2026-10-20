@@ -1066,6 +1066,15 @@ body.nav-open { overflow: hidden; }
     inset -3px -3px 2px 1px rgba(255, 255, 255, 0.18);
 }
 
+/* the inset edge highlight reads as a stray border on a full-bleed
+   mobile modal, so drop it below the tablet breakpoint */
+@media (max-width: 699px) {
+  .modal::after,
+  [data-theme="dark"] .modal::after {
+    box-shadow: none;
+  }
+}
+
 [data-theme="dark"] .modal-scroll { scrollbar-color: var(--purple-500) transparent; }
 [data-theme="dark"] .modal-scroll::-webkit-scrollbar-thumb { background-color: var(--purple-500); }
 [data-theme="dark"] .modal-scroll::-webkit-scrollbar-thumb:hover { background-color: var(--pink-500); }

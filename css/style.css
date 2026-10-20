@@ -207,7 +207,16 @@ dl, dd { margin: 0; }
   border-radius: 999px;
   border: 2px solid var(--sage-400);
   background: var(--sage-200);
-  transition: background-color 0.4s var(--ease), border-color 0.4s var(--ease);
+  transition: background-color 0.4s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease), transform 0.2s var(--ease);
+}
+.theme-toggle:hover {
+  border-color: var(--forest-600);
+  box-shadow: 0 0 0 4px rgba(63, 107, 83, 0.14);
+}
+.theme-toggle:active { transform: scale(0.92); }
+[data-theme="dark"] .theme-toggle:hover {
+  border-color: var(--purple-500);
+  box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.22);
 }
 .theme-toggle-knob {
   position: absolute;
@@ -222,16 +231,18 @@ dl, dd { margin: 0; }
   justify-content: center;
   background: var(--forest-600);
   color: var(--sage-100);
-  transition: left 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55), background-color 0.4s var(--ease), color 0.4s var(--ease);
+  transition: left 0.45s var(--ease), background-color 0.4s var(--ease), color 0.4s var(--ease);
 }
 .theme-toggle-knob svg {
   position: absolute;
   width: 13px;
   height: 13px;
-  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+  transition: opacity 0.4s var(--ease), transform 0.45s var(--ease);
 }
 .theme-toggle-knob .icon-sun { opacity: 1; transform: rotate(0deg) scale(1); }
-.theme-toggle-knob .icon-moon { opacity: 0; transform: rotate(-90deg) scale(0.5); }
+.theme-toggle-knob .icon-moon { opacity: 0; transform: rotate(-135deg) scale(0.3); }
+[data-theme="dark"] .theme-toggle-knob .icon-moon { transform: rotate(0deg) scale(1); }
+[data-theme="dark"] .theme-toggle-knob .icon-sun { transform: rotate(135deg) scale(0.3); }
 
 [data-theme="dark"] .theme-toggle { background: #1a1838; border-color: #2d2a4e; }
 [data-theme="dark"] .theme-toggle-knob {
@@ -239,8 +250,8 @@ dl, dd { margin: 0; }
   background: #e8e6f0;
   color: #1a1838;
 }
-[data-theme="dark"] .theme-toggle-knob .icon-sun { opacity: 0; transform: rotate(90deg) scale(0.5); }
-[data-theme="dark"] .theme-toggle-knob .icon-moon { opacity: 1; transform: rotate(0deg) scale(1); }
+[data-theme="dark"] .theme-toggle-knob .icon-sun { opacity: 0; }
+[data-theme="dark"] .theme-toggle-knob .icon-moon { opacity: 1; }
 
 .nav-toggle {
   display: none;
@@ -436,7 +447,7 @@ section {
   width: clamp(180px, 46vw, 240px);
   margin: 0 auto;
   padding: 10px;
-  background: var(--forest-900);
+  background: var(--forest-800);
   border-radius: 34px;
   box-shadow: 0 24px 60px rgba(24, 36, 32, 0.22);
 }
@@ -714,13 +725,13 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.25s var(--ease);
 }
-.modal-close:hover { transform: rotate(90deg); }
 .modal-close span {
+  /* same line length as the hamburger menu's open/close icon
+     (.nav-toggle span), for a consistent X across the site */
   position: absolute;
   z-index: 2;
-  width: 16px; height: 1px;
+  width: 32px; height: 1px;
   background: var(--color-ink);
   transition: background 0.25s var(--ease);
 }
@@ -988,6 +999,11 @@ body.nav-open { overflow: hidden; }
 
   .header-cta { display: none; }
   .theme-toggle { margin-left: auto; }
+  /* hidden while the hamburger menu is open, back once it's closed;
+     the close button takes over pushing itself to the right edge
+     since the toggle's own margin-left:auto disappears with it */
+  body.nav-open .theme-toggle { display: none; }
+  body.nav-open .nav-toggle { margin-left: auto; }
   .nav-toggle { display: flex; }
 
   .work-item-trigger {

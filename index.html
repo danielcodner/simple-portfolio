@@ -18,6 +18,10 @@
       var theme = stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
       if (theme === "dark") document.documentElement.setAttribute("data-theme", "dark");
     } catch (e) {}
+    // Always start a fresh load at the top of the page instead of the
+    // browser restoring the scroll position from before a refresh.
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
   })();
 </script>
 </head>
